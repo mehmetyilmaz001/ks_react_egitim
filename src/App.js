@@ -1,29 +1,19 @@
-import React from 'react';
-import { Header, Footer } from './components'
-import './app.scss';
-
+import React from "react";
+import { Header, Footer } from "./components";
+import "./app.scss";
+import UserManagement from "./components/UserManagement";
 
 function App() {
 
-  const users = [
-    {name: "Mehmet", surname: "Yılmaz", city: "İstanbul"},
-    {name: "Erol", surname: "Ülgü", city: "Hatay"},
-    {name: "Emral", surname: "Yılmaz", city: "İstanbul"},
-  ];
-
   return (
     <div className="App">
-
       <Header title="Kullanıcı Listesi -" />
 
-      <ul>
-        { users.map((i) => <li>{i.name}</li>) } 
-       </ul>
+      <UserManagement />
 
-       <Footer />
+      <Footer />
     </div>
   );
-
 }
 
 export default App;
