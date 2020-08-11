@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import UserList from '../UserList';
-import UserDetail from '../UserDetail';
-import UserForm  from '../UserForm';
+import UserList from '../../components/UserList';
+import UserDetail from '../../components/UserDetail';
+import UserForm  from '../../components/UserForm';
+import Header from '../../components/Header';
+import Footer from '../../components/Footer';
 import { usersDefaultList } from '../../data';
  
 const UserManagement = () => {
@@ -21,7 +23,9 @@ const UserManagement = () => {
         setSelectedUser(null);
     }
 
-    return ( 
+    return (
+        <>
+        <Header title="Kullanıcı Yönetimi" />
         <div className="component-base">
             <UserList list={users} onUserSelect={(user) => setSelectedUser(user)}/>
 
@@ -32,6 +36,8 @@ const UserManagement = () => {
             <UserForm onInsert={_onInsert} />
 
         </div>
+        <Footer />
+        </>
      );
 }
  

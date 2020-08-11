@@ -1,17 +1,36 @@
 import React from "react";
-import { Header, Footer } from "./components";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route
+} from "react-router-dom";
 import "./app.scss";
-import UserManagement from "./components/UserManagement";
+import UserManagement from "./pages/UserManagement";
+import Home from "./pages/Home";
+
+
 
 function App() {
 
   return (
     <div className="App">
-      <Header title="Kullanıcı Listesi -" />
+      
 
-      <UserManagement />
+      <Router>
+        <Switch>
+          
+          <Route path="/" exact>
+            <Home />
+          </Route>
 
-      <Footer />
+          <Route path="/user-management" exact>
+            <UserManagement />
+          </Route>
+
+        </Switch>
+      </Router>
+
+      
     </div>
   );
 }
