@@ -25,7 +25,6 @@ const UserManagement = () => {
 
     return (
         <>
-        <Header title="Kullanıcı Yönetimi" />
         <div className="component-base">
             <UserList list={users} onUserSelect={(user) => setSelectedUser(user)}/>
 
@@ -36,7 +35,6 @@ const UserManagement = () => {
             <UserForm onInsert={_onInsert} />
 
         </div>
-        <Footer />
         </>
      );
 }
