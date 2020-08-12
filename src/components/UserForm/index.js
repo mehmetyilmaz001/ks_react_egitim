@@ -1,5 +1,6 @@
 import React from 'react';
-
+import { useDispatch } from 'react-redux';
+import actionConsts from '../../state/actions';
 
 const initialValues = {
     name: "",
@@ -7,9 +8,10 @@ const initialValues = {
     city: ""
 };
 
-const UserForm = ({onInsert}) => {
+const UserForm = () => {
     
     const [ values, setValues ] = React.useState(initialValues);
+    const dispatch = useDispatch();
 
     const [ msg, setMsg ] = React.useState({
         type: 0,
@@ -30,7 +32,12 @@ const UserForm = ({onInsert}) => {
             })
         }
 
-        onInsert(values);
+
+        dispatch({
+            type: actionConsts.CREATE_USER,
+            payload: values
+        })
+        
         setValues(initialValues);
 
     }

@@ -1,38 +1,57 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import UserList from '../../components/UserList';
 import UserDetail from '../../components/UserDetail';
 import UserForm  from '../../components/UserForm';
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
-import { usersDefaultList } from '../../data';
+import { useDispatch, useSelector } from 'react-redux'
+import { useDidUpdate } from '../../hooks';
  
 const UserManagement = () => {
 
-    const [ users, setUsers ] = useState(usersDefaultList);
-    const [ selectedUser, setSelectedUser ] = useState(null);
+    const [ title, setTitle ] = useState("Kullanıcı Yönetimi");
 
-    const _onInsert = (values) => {
-        console.log(values);
-        let newList = [...users, values];
-        setUsers(newList);
+    const selectedUser = useSelector(s => s.users.selectedUser);
+    const dispatch = useDispatch();
+
+
+    const _sendTitleToGlobal = () => {
+        dispatch({
+            type: "SET_APP_TITLE",
+            payload: title
+          })
     }
-    
-    const _onDelete = (name) => {
-        let newList = users.filter(f => f.name !== name);
-        setUsers(newList);
-        setSelectedUser(null);
-    }
+
+    useEffect(() => {
+        _sendTitleToGlobal();
+        
+    }, []);
+
+
+    useDidUpdate(() => {
+        alert("title değişikliği yakalandı!")
+    }, [title])
+
+
+
+    useEffect(() => {
+        return () => {
+            alert("component dom'dan silinecek");
+        }
+    }, [])
+
+
 
     return (
         <>
         <div className="component-base">
-            <UserList list={users} onUserSelect={(user) => setSelectedUser(user)}/>
+            <UserList/>
 
             {selectedUser && 
-                <UserDetail user={selectedUser} onDeleteUser={_onDelete} onResetUser={() => setSelectedUser(null)}/>
+                <UserDetail />
             }
+
+            <button onClick={() => setTitle("İşlem yapılıyor...")}>İşlem Yap</button>
             
-            <UserForm onInsert={_onInsert} />
+            <UserForm  />
 
         </div>
         </>

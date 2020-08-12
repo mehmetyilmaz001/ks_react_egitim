@@ -1,6 +1,23 @@
 import React from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import actionConsts from '../../state/actions';
 
-const UserDetail = ({user, onResetUser, onDeleteUser}) => {
+const UserDetail = ({onResetUser}) => {
+
+  const dispatch = useDispatch();
+  const user = useSelector(s => s.users.selectedUser);
+
+  const _onDeleteUser = (name) => {
+      dispatch({
+        type: actionConsts.DELETE_USER,
+        payload: name
+      });
+
+      dispatch({
+        type: actionConsts.SET_SELECTED_USER,
+        payload: null
+      });
+  } 
 
 
     if(!user){
@@ -18,7 +35,7 @@ const UserDetail = ({user, onResetUser, onDeleteUser}) => {
       </div>
 
       <button onClick={onResetUser}>Seçimi Kaldır</button>
-      <button onClick={() => onDeleteUser(user.name)} style={{color:"red"}}>X Sil</button>
+      <button onClick={() => _onDeleteUser(user.name)} style={{color:"red"}}>X Sil</button>
     </div>
   );
 };
