@@ -1,6 +1,11 @@
 import React, { useEffect } from "react";
 import { useDispatch } from 'react-redux'
 
+export const isTest = () => {
+  console.log(process.env);
+  return process.env.REACT_APP_ENVIRONMENT === 'test';
+}
+
 const Home = () => {
 
   const dispatch = useDispatch();
@@ -12,8 +17,10 @@ const Home = () => {
     })
   }, []);
 
+
   return (
     <>
+        {isTest() && <>Şuan test ortamındasınız</>}
         <div className="card">Anasayfa</div>
     </>
   );
