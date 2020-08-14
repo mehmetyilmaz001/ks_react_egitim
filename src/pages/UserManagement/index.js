@@ -31,15 +31,6 @@ const UserManagement = () => {
     }, [title])
 
 
-
-    useEffect(() => {
-        return () => {
-            alert("component dom'dan silinecek");
-        }
-    }, [])
-
-
-
     return (
         <>
         <div className="component-base">

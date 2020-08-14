@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import actionConsts from '../../state/actions';
+import { insertUser } from '../../state/actions/users';
 
 const initialValues = {
     name: "",
@@ -19,7 +20,7 @@ const UserForm = () => {
     });
 
     const _onInsert = () => {
-        if(values.name === "" ||values.surname === "" || values.city === ""){
+        if(values.name === "" || values.surname === "" || values.city === ""){
             setMsg({
                 type: 1,
                 msg: "Lütfen tüm alanları doldurunuz!"
@@ -33,10 +34,12 @@ const UserForm = () => {
         }
 
 
-        dispatch({
-            type: actionConsts.CREATE_USER,
-            payload: values
-        })
+        // dispatch({
+        //     type: actionConsts.CREATE_USER,
+        //     payload: values
+        // })
+        
+        dispatch(insertUser(values))
         
         setValues(initialValues);
 

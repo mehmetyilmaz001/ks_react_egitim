@@ -1,17 +1,35 @@
 import actionConsts from '../actions';
 
 const INITIAL_STATE =  {
-    list: [
-        { name: "Mehmet", surname: "Yılmaz", city: "İstanbul" },
-        { name: "Erol", surname: "Ülgü", city: "Hatay" },
-        { name: "Emral", surname: "Yılmaz", city: "İstanbul" },
-      ],
-
-      selectedUser: null
+    list: [],
+    selectedUser: null,
+    loading: false,
+    
 }
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
+     
+      case actionConsts.FETCH_USERS_REQUEST:
+            return {...state, loading: true}
+      
+      case actionConsts.FETCH_USERS_SUCCESS:
+            return {...state, list: action.payload, loading: false}
+
+    case actionConsts.FETCH_USERS_FAIL:
+            return {...state, loading: false}
+
+     
+     case actionConsts.FETCH_USER_DETAIL_REQUEST:
+            return {...state, loading: true}
+      
+      case actionConsts.FETCH_USER_DETAIL_SUCCESS:
+            return {...state, selectedUser: action.payload, loading: false}
+
+    case actionConsts.FETCH_USER_DETAIL_FAIL:
+            return {...state, loading: false}
+
+
       case actionConsts.SET_SELECTED_USER:
             return {...state, selectedUser: action.payload}
 
@@ -27,6 +45,17 @@ export default (state = INITIAL_STATE, action) => {
             const newList = state.list[foundIndex] = action.payload;  
 
             return {...state, list: newList}
+
+
+
+      case "POST_USER_REQUEST":
+            return {...state, loading: true}
+            
+      case "POST_USER_SUCCESS":
+      return {...state, list: [...state.list, action.payload], loading: false}
+
+      case "POST_USER_FAIL":
+            return {...state, msg: action.payload, loading: false}
     
         default:
             return state;
