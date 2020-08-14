@@ -13,6 +13,7 @@ import LoginPage from './pages/LoginPage';
 import Intro from "./components/Intro";
 import { useSelector } from "react-redux";
 import UserDetailPage from "./pages/UserDetail";
+import 'antd/dist/antd.css';
 
 const PublicRoute = ({ children, ...rest }) => {
   return (
